@@ -9,6 +9,9 @@
 ### Iteration 3 — User Theme Change
 > "site em tons de branco, nao uses emojis"
 
+### Iteration 4 — User Brand Assets + More Colorful + New Font
+> "já anxei o logo e banners que quero que ueses, usa um tipo de letra mais apelativo e torna o site mais colorido mais premium"
+
 ## User Choices (literal)
 - Brand: **SQZ** | Tag: **squiiz by Lemon Jelly**
 - Slogan: **"When life gives you lemon..."**
@@ -26,9 +29,11 @@
 - **Data**: 36 products static in `/app/frontend/src/data/products.js` across 5 categories
 - **Assets**: cloned from `mendesrui19/teste` GitHub → `/app/frontend/public/assets/...`
 
-## Design System (Iteration 3 — current)
-- **Theme**: Light editorial luxury (Zara-like, off-white canvas)
-- **Palette**: bg `#FAFAF7`, surface `#F1F0EB`, text `#0A0A0A`, mute `#6B6B6B`, accent `#9DAA10` (deep citrus)
+## Design System (Iteration 4 — current)
+- **Theme**: Light editorial premium with vibrant SQZ brand color blocks
+- **Palette**: bg `#FAFAF7`, ink `#0A0A0A`, mute `#6B6B6B`. Brand vibrants: yellow `#FBD503`, blue `#6889EC`, pink `#FC6CA7`, green `#B2D801`, lavender `#D0B2FF`, orange `#FE8E04`
+- **Typography**: **Bagel Fat One** (groovy fat display — matches the SQZ lemon logo lettering) + Instrument Serif (italic accents) + Manrope (body)
+- **Brand assets used (user uploaded)**: `logo.jpeg`, `banner_squeeze.png`, `banner_lemon_splash.png`, `editorial_model.png`, `slogan_blue.png`
 - **Typography**: Instrument Serif (display, italic Q accent) + Manrope (body)
 - **Motion**: Lenis smooth scroll, parallax hero, scroll-reveal masks, sticky editorial split, custom cursor (dot + ring follower), cinematic SVG lemon (squeeze + drip + droplets), marquees with serif italic
 - **Layout**: 1600px max-width, massive negative space, asymmetric editorial grids, hairline borders, no rounded corners
@@ -58,16 +63,18 @@
 - Editorial dark footer with huge "SQZ" logotype
 
 ## Tested
-- Iteration 1 (pop-art): 100% — abandoned on user feedback
-- Iteration 2 (dark editorial): 100% — abandoned on user feedback (wanted light)
-- **Iteration 3 (light editorial)**: ✅ Backend 100%, Frontend 100%
-  - Light theme confirmed: body bg `rgb(250,250,247)`, text `rgb(10,10,10)`
-  - Zero emojis confirmed across both pages (Unicode regex scan)
-  - All 36 product images load on /produtos
-  - All 6 filters work with correct counts (11/10/5/5/5)
-  - Custom cursor + Lenis smooth scroll + parallax + scroll-reveals all functional
-  - Navbar glassmorphism on scroll with light tint
-  - Lemon SVG animation cycling through idle → squeeze → drip phases on light bg
+- Iteration 1 (pop-art) → abandoned
+- Iteration 2 (dark editorial) → abandoned
+- Iteration 3 (light minimalist) → abandoned (wanted more colour)
+- **Iteration 4 (light + brand assets + groovy font)**: ✅ Backend 100%, Frontend 100%
+  - Bagel Fat One confirmed on hero-title + produtos-title
+  - All 5 user-uploaded brand assets render correctly
+  - Vibrant brand color block sections work (yellow logo block, pink manifesto, blue, green, lavender)
+  - Product cards use `mix-blend-multiply` so PNG white bg integrates with tinted card colors
+  - Filter buttons get category-specific colors when active (yellow / pink / blue / green / lavender / orange)
+  - Zero emojis confirmed (Unicode regex)
+  - All 36 product images load
+  - Footer dark with yellow SQZ logotype
 
 ## Backlog / Future
 - P1: Product detail modal with multiple photos
