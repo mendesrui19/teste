@@ -1,122 +1,69 @@
 {
-  "project_name": "SQZ Catalog",
-  "brand": "SQZ",
-  "theme": "light",
-  "archetype": "6_vibrant_play",
-  "design_philosophy": "Joyful, bold, and animated. A pop-art-inspired catalog with solid color blocks, thick borders, large rounded typography, and exaggerated playful motion. Zero generic 'SaaS' vibes. Heavily relies on contrast, bold colors, and interactive elements like squeezing lemons and falling juice drops.",
+  "theme": "dark",
+  "archetype": "5 (Jewel & Luxury)",
+  "vibe": "Cinematic, moody, luxury editorial, like Spider-Man site meets Zara. Heavy negative space, slow fluid motion.",
   "colors": {
-    "primary": "#FBD503",
-    "secondary": "#04A5E6",
-    "accent_pink": "#FC6CA7",
-    "accent_green": "#B2D801",
-    "accent_lavender": "#D0B2FF",
-    "accent_orange": "#FE8E04",
-    "neutral_dark": "#151515",
-    "neutral_light": "#FFFFFF",
-    "background_default": "#FFFFFF",
-    "surface": "#FBD503"
+    "background_primary": "#0A0A0A",
+    "background_secondary": "#121212",
+    "text_primary": "#F5F5F0",
+    "text_secondary": "#A3A3A3",
+    "accent_primary": "#E5F33D",
+    "accent_secondary": "#D4E129",
+    "border_subtle": "rgba(255, 255, 255, 0.1)"
   },
   "typography": {
-    "heading_font": "Fredoka, sans-serif",
-    "body_font": "Libre Franklin, sans-serif",
-    "scale": {
-      "h1": "text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight",
-      "h2": "text-4xl sm:text-5xl font-bold tracking-tight",
-      "h3": "text-2xl sm:text-3xl font-bold",
-      "body": "text-base sm:text-lg font-medium",
-      "button": "text-lg sm:text-xl font-bold uppercase tracking-wider"
+    "heading_font": "Instrument Serif",
+    "body_font": "Manrope",
+    "scales": {
+      "h1": "text-6xl md:text-[8rem] tracking-tighter leading-none font-normal",
+      "h2": "text-4xl md:text-5xl tracking-tight font-normal",
+      "h3": "text-2xl font-normal",
+      "body": "text-base leading-relaxed tracking-wide font-light",
+      "overline": "text-xs tracking-[0.2em] uppercase font-bold text-accent_primary"
     }
   },
-  "layout_and_spacing": {
-    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
-    "section_spacing": "py-16 sm:py-24",
-    "grid_system": "Neobrutalist Bento / Asymmetric Grid. Use thick borders and hard shadows.",
-    "border_style": "border-[3px] border-[#151515]",
-    "shadow_style": "shadow-[8px_8px_0px_0px_rgba(21,21,21,1)] hover:shadow-[12px_12px_0px_0px_rgba(21,21,21,1)] transition-shadow duration-300",
-    "rounded_style": "rounded-2xl sm:rounded-3xl"
+  "spacing_and_layout": {
+    "general": "Massive negative space. Components should breathe. Use py-24 or py-32 for section padding.",
+    "grid": "Bento for features, strict 4-column minimal grid for product catalog (mobile 1-2 col).",
+    "alignment": "Left-aligned for paragraphs, asymmetric placement for images to feel like an editorial layout."
   },
-  "motion_and_interaction": {
-    "hero_animation": "Lemon squeezing animation using Framer Motion (scale down on Y-axis, scale up on X-axis to simulate squish), followed by staggered juice drops falling down the screen.",
-    "hover_states": "-translate-y-1 transition-transform duration-200",
-    "particles": "Floating lemon drops or stars across the background using framer-motion or simple CSS absolute positioned animated divs.",
-    "marquee": "Endless scrolling marquee reading 'SQUEEEZE! SQZ THEM! WHEN LIFE GIVES YOU LEMON...' in large outlined text."
+  "motion_and_interactions": {
+    "scroll": "Lenis smooth scroll is MANDATORY. Feels heavy and momentum-based.",
+    "parallax": "Framer Motion useScroll/useTransform to move hero images slower than page scroll.",
+    "transitions": "Slow lerp fades, 0.8s to 1.2s ease-in-out. Fade and slightly slide up on entry.",
+    "hover": "Image zoom on hover (scale 1.05) with caption reveal. Minimalist custom cursor dot follower.",
+    "sticky": "Scroll-pinned sections that lock in place while content flows past.",
+    "emojis": "FORBIDDEN. No emojis anywhere, no emoji hands, zero emojis."
   },
   "components": {
-    "navigation": {
-      "style": "Sticky top-4 mx-4 z-50 bg-white border-[3px] border-[#151515] rounded-full px-6 py-4 flex justify-between items-center shadow-[6px_6px_0px_0px_rgba(21,21,21,1)]",
-      "links": ["Início", "Produtos", "Sobre Nós"]
-    },
-    "buttons": {
-      "primary": "bg-[#FC6CA7] text-white border-[3px] border-[#151515] rounded-full px-8 py-3 shadow-[4px_4px_0px_0px_rgba(21,21,21,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(21,21,21,1)] active:translate-y-0 active:shadow-none transition-all font-heading uppercase text-xl"
-    },
-    "product_card": {
-      "style": "bg-white border-[3px] border-[#151515] rounded-3xl overflow-hidden shadow-[8px_8px_0px_0px_rgba(21,21,21,1)] flex flex-col hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(21,21,21,1)] transition-all group",
-      "image_container": "w-full aspect-square border-b-[3px] border-[#151515] overflow-hidden bg-[#FBD503]/20",
-      "content": "p-6 flex flex-col gap-2 bg-[#FFFFFF]"
-    },
-    "category_pills": {
-      "style": "px-6 py-2 rounded-full border-[3px] border-[#151515] font-bold cursor-pointer transition-colors shadow-[4px_4px_0px_0px_rgba(21,21,21,1)]",
-      "active_bg": "bg-[#04A5E6] text-white",
-      "inactive_bg": "bg-white text-[#151515] hover:bg-[#FBD503]"
-    }
+    "navbar": "Glassmorphism/Crystal variant but very dark (bg-black/60 backdrop-blur-xl border-b border-white/10). Hidden on scroll down, reveals on scroll up. Minimalist links.",
+    "hero": "Cinematic parallax hero. Full-bleed background. Huge 'SQZ' text with kinetic kerning. Slogan in clean sans overlay.",
+    "marquee": "Infinite marquee using Instrument Serif, italicized in parts. Thin borders.",
+    "product_card": "No borders, no shadows. Full bleed image wrapper, text below is small and uppercase. Hover reveals color variants.",
+    "sobre_nos": "Split layout. One side sticky image, other side scrolling text.",
+    "footer": "Minimalist editorial footer. Py-32. Huge brand logotype."
   },
-  "pages": [
-    {
-      "name": "Home",
-      "path": "/",
-      "sections": [
-        "Hero: Massive typography 'SQZ', interactive/animated lemon squeeze visual, slogan 'When life gives you lemon...'",
-        "Marquee: Scrolling text separator",
-        "About Us: Short playful brand intro block with vibrant background (e.g., Pink or Blue)",
-        "Featured Products: Mini grid of 3-4 top products, link to view all"
-      ]
-    },
-    {
-      "name": "Produtos",
-      "path": "/produtos",
-      "sections": [
-        "Header: Title 'Nossos Produtos'",
-        "Filters: Categories -> Colares, Brincos, Anéis, Capas, Acessórios",
-        "Grid: Masonry or neat grid of all products"
-      ]
-    }
-  ],
-  "media_assets": {
-    "hero_lemon_animation_placeholder": {
-      "url": "https://static.prod-images.emergentagent.com/jobs/e6ec786c-b304-44d9-acf3-0723c56bac93/images/01bb05b5291d2ec992d435d324a2201d19e15cf7178fa9356c8bd79fa3f037a8.png",
-      "description": "Playful pop-art lemon squeeze vector art for hero section"
-    },
-    "background_drops": {
-      "url": "https://static.prod-images.emergentagent.com/jobs/e6ec786c-b304-44d9-acf3-0723c56bac93/images/4b2144a0d374f3841f9b34a90d5d31f667729f350b36910dd1bb77324b656a18.png",
-      "description": "Abstract background with lemon drops and splashes"
-    },
-    "products": {
-      "colares": [
-        "https://images.unsplash.com/photo-1642597383758-28764a710e68?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzN8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMGNodW5reSUyMG5lY2tsYWNlJTIwamV3ZWxyeXxlbnwwfHx8fDE3Nzc5OTc1MDh8MA&ixlib=rb-4.1.0&q=85"
-      ],
-      "capas": [
-        "https://images.unsplash.com/photo-1582000129759-dc56c7b45cde?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHw0fHxjb2xvcmZ1bCUyMHBob25lJTIwY2FzZSUyMHBhc3RlbHxlbnwwfHx8fDE3Nzc5OTc1MDh8MA&ixlib=rb-4.1.0&q=85",
-        "https://images.unsplash.com/photo-1577954732026-2071521acdfb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMHBob25lJTIwY2FzZSUyMHBhc3RlbHxlbnwwfHx8fDE3Nzc5OTc1MDh8MA&ixlib=rb-4.1.0&q=85"
-      ],
-      "acessorios": [
-        "https://images.unsplash.com/photo-1661705484082-85c0bbbe7254?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzN8MHwxfHNlYXJjaHwyfHxjb2xvcmZ1bCUyMGNodW5reSUyMG5lY2tsYWNlJTIwamV3ZWxyeXxlbnwwfHx8fDE3Nzc5OTc1MDh8MA&ixlib=rb-4.1.0&q=85"
-      ],
-      "lifestyle": [
-        "https://images.unsplash.com/photo-1592816348552-0f10135a5458?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHwzfHxsZW1vbiUyMGZhc2hpb24lMjBsaWZlc3R5bGV8ZW58MHx8fHwxNzc3OTk3NTA4fDA&ixlib=rb-4.1.0&q=85"
-      ]
-    }
-  },
-  "testing": {
-    "attributes": "ALL interactive elements MUST include a data-testid attribute in kebab-case representing their role. Examples: data-testid='nav-link-produtos', data-testid='filter-button-colares', data-testid='product-card-1'."
+  "media": {
+    "hero_background": "https://static.prod-images.emergentagent.com/jobs/e6ec786c-b304-44d9-acf3-0723c56bac93/images/b816fb9ac314b02f960c0373bc71de978b3ffc7130791a67b032bbbc3c3e2acd.png",
+    "hero_background_description": "Hyper-realistic glowing lemon slice in dark infinite space. Used to drive the cinematic Spider-man vibe with parallax.",
+    "editorial_jewelry": "https://static.prod-images.emergentagent.com/jobs/e6ec786c-b304-44d9-acf3-0723c56bac93/images/6501825d13b48f6769855232cf2d7b5e1fe8f564e4603c3bbde86e2416d6cf8d.png",
+    "editorial_jewelry_description": "Cinematic portrait of luxury jewelry on model.",
+    "product_ring_macro": "https://static.prod-images.emergentagent.com/jobs/e6ec786c-b304-44d9-acf3-0723c56bac93/images/138ae8311bbf2e2766efe218168ec77637d32301aed401b0b9811c663175ec23.png",
+    "product_ring_macro_description": "Macro shot of silver ring on dark rock.",
+    "product_necklace_1": "https://images.unsplash.com/photo-1770062422860-92c107ef02cc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxNzV8MHwxfHNlYXJjaHwzfHxsdXh1cnklMjBqZXdlbHJ5JTIwZGFyayUyMGVkaXRvcmlhbHxlbnwwfHx8fDE3Nzc5OTg1Mjd8MA&ixlib=rb-4.1.0&q=85",
+    "product_earrings_1": "https://images.unsplash.com/photo-1765612374091-7b9f61c80574?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxNzV8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBqZXdlbHJ5JTIwZGFyayUyMGVkaXRvcmlhbHxlbnwwfHx8fDE3Nzc5OTg1Mjd8MA&ixlib=rb-4.1.0&q=85",
+    "product_accessories_lemon": "https://images.unsplash.com/photo-1623317921149-cf2bf7d6cb80?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1Mjh8MHwxfHNlYXJjaHw0fHxsZW1vbiUyMHllbGxvdyUyMGZhc2hpb24lMjBhY2Nlc3Nvcnl8ZW58MHx8fHwxNzc3OTk4NTI3fDA&ixlib=rb-4.1.0&q=85"
   },
   "instructions_to_main_agent": [
-    "Use Tailwind CSS for styling. Implement the neobrutalist pop-art style with border-[3px] and solid shadows.",
-    "Do NOT use generic Shadcn cards out of the box. Customize them or build custom HTML divs with the specified borders.",
-    "Use Framer Motion to create the 'lemon squeeze' hero animation (scaling, bouncing) and floating lemon drops.",
-    "Include an infinite text marquee (e.g., using framer-motion or CSS keyframes) with the text 'SQUEEEZE! SQZ THEM!'.",
-    "Font combination: Fredoka for headings, Libre Franklin for body text. Load them via Google Fonts.",
-    "Ensure the layout feels like 'squiiz by Lemon Jelly' — playful, zine-like, highly colorful and fun.",
-    "Build the 'Produtos' page with a functioning client-side filter by category.",
-    "No checkout or cart flow needed; this is a display catalog."
+    "IMPORTANT: Setup project in Javascript (.jsx/.js files). NO TYPE SCRIPT.",
+    "Install and setup 'lenis' for smooth scrolling.",
+    "Install 'framer-motion' for all scroll reveals, parallax (useScroll, useTransform).",
+    "Use raw HTML + Tailwind CSS. Avoid Shadcn components for marketing layout structure, build custom grid systems.",
+    "Import 'Instrument Serif' and 'Manrope' fonts from Google Fonts via css @import.",
+    "Set global body background to #0A0A0A and text to #F5F5F0.",
+    "Create a cinematic hero with the provided generated lemon image scaling down on scroll.",
+    "Design 'Produtos' grid strictly to a 4-col minimalist grid like Zara.",
+    "Zero emojis in the entire application.",
+    "Ensure 'data-testid' is present on all interactive elements."
   ]
 }
