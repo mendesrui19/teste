@@ -258,16 +258,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SLOGAN BANNER — full image, no crop */}
+      {/* SLOGAN BANNER — at natural size to keep crisp */}
       <section
-        className="relative w-full"
+        className="relative w-full py-12 sm:py-16"
         style={{ background: "#6889EC" }}
         data-testid="slogan-banner-section"
       >
         <img
           src={SLOGAN_BLUE}
           alt="When life gives you lemons SQZ them!"
-          className="w-full h-auto block"
+          className="w-full max-w-[760px] mx-auto h-auto block"
         />
       </section>
 
