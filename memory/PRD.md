@@ -6,6 +6,9 @@
 ### Iteration 2 — User Redesign Request
 > "nao gostei do design, quero algo que pareça premium tipo loja da zara extendes mas com animações profissionais nao emojis, tipo o site do spider man que tens no teu menu principal"
 
+### Iteration 3 — User Theme Change
+> "site em tons de branco, nao uses emojis"
+
 ## User Choices (literal)
 - Brand: **SQZ** | Tag: **squiiz by Lemon Jelly**
 - Slogan: **"When life gives you lemon..."**
@@ -23,9 +26,9 @@
 - **Data**: 36 products static in `/app/frontend/src/data/products.js` across 5 categories
 - **Assets**: cloned from `mendesrui19/teste` GitHub → `/app/frontend/public/assets/...`
 
-## Design System (Iteration 2)
-- **Theme**: Dark cinematic editorial (Zara × Spider-Man hybrid)
-- **Palette**: bg `#0A0A0A`, surface `#121212`, text `#F5F5F0`, mute `#A3A3A3`, accent `#E5F33D`
+## Design System (Iteration 3 — current)
+- **Theme**: Light editorial luxury (Zara-like, off-white canvas)
+- **Palette**: bg `#FAFAF7`, surface `#F1F0EB`, text `#0A0A0A`, mute `#6B6B6B`, accent `#9DAA10` (deep citrus)
 - **Typography**: Instrument Serif (display, italic Q accent) + Manrope (body)
 - **Motion**: Lenis smooth scroll, parallax hero, scroll-reveal masks, sticky editorial split, custom cursor (dot + ring follower), cinematic SVG lemon (squeeze + drip + droplets), marquees with serif italic
 - **Layout**: 1600px max-width, massive negative space, asymmetric editorial grids, hairline borders, no rounded corners
@@ -56,13 +59,15 @@
 
 ## Tested
 - Iteration 1 (pop-art): 100% — abandoned on user feedback
-- **Iteration 2 (editorial)**: ✅ Backend 100%, Frontend 100%
-  - Zero emojis confirmed across both pages
-  - All 36 product images load
+- Iteration 2 (dark editorial): 100% — abandoned on user feedback (wanted light)
+- **Iteration 3 (light editorial)**: ✅ Backend 100%, Frontend 100%
+  - Light theme confirmed: body bg `rgb(250,250,247)`, text `rgb(10,10,10)`
+  - Zero emojis confirmed across both pages (Unicode regex scan)
+  - All 36 product images load on /produtos
   - All 6 filters work with correct counts (11/10/5/5/5)
-  - Custom cursor + Lenis + parallax + scroll-reveals all functional
-  - Navigation working
-  - Lemon SVG animation cycling through idle → squeeze → drip phases
+  - Custom cursor + Lenis smooth scroll + parallax + scroll-reveals all functional
+  - Navbar glassmorphism on scroll with light tint
+  - Lemon SVG animation cycling through idle → squeeze → drip phases on light bg
 
 ## Backlog / Future
 - P1: Product detail modal with multiple photos
