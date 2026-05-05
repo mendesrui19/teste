@@ -267,7 +267,7 @@ export default function Home() {
         <img
           src={SLOGAN_BLUE}
           alt="When life gives you lemons SQZ them!"
-          className="w-full max-w-[1100px] mx-auto h-auto object-contain block"
+          className="w-full h-auto block"
         />
       </section>
 
