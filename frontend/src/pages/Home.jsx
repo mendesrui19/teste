@@ -173,15 +173,13 @@ export default function Home() {
         color="#0a0a0a"
       />
 
-      {/* BRAND BANNER STRIP — uses your real banner */}
-      <section className="relative" data-testid="brand-banner-section">
-        <div className="relative w-full overflow-hidden border-b border-sqz-line">
-          <img
-            src={BANNER_SQUEEZE}
-            alt="SQZ — squiiz by Lemon Jelly — SQUEEEZE!"
-            className="w-full h-[28vw] sm:h-[22vw] min-h-[280px] object-cover"
-          />
-        </div>
+      {/* BRAND BANNER STRIP — uses your real banner, full image visible */}
+      <section className="relative w-full bg-sqz-bg" data-testid="brand-banner-section">
+        <img
+          src={BANNER_SQUEEZE}
+          alt="SQZ — squiiz by Lemon Jelly — SQUEEEZE!"
+          className="w-full h-auto block"
+        />
       </section>
 
       {/* PHILOSOPHY — colorful blocks like the real banner panels */}

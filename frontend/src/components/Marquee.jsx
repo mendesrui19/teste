@@ -4,7 +4,7 @@ export default function Marquee({ words = [], speedSec = 38, bg, color }) {
       {words.map((w, i) => (
         <span key={i} className="flex items-center gap-10">
           <span
-            className="font-display text-[10vw] sm:text-[8vw] leading-none"
+            className="font-display text-5xl sm:text-6xl lg:text-[5.5rem] leading-none"
             style={{ color: color || "#0a0a0a" }}
           >
             {w}
