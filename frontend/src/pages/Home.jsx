@@ -64,7 +64,7 @@ export default function Home() {
 
         {/* HUD top */}
         <div className="absolute top-20 inset-x-0 px-6 lg:px-12 flex justify-between text-[10px] tracking-[0.3em] uppercase text-sqz-mute z-20 font-semibold">
-          <span>Lisboa · 38.7223° N</span>
+          <span>Vila Nova de Gaia · Made in Portugal</span>
           <span>Vol. 01 · SS 26</span>
         </div>
 
@@ -117,8 +117,9 @@ export default function Home() {
               transition={{ duration: 1, delay: 0.85 }}
               className="text-sqz-mute font-light max-w-md mt-6 text-base sm:text-lg"
             >
-              Bijutaria, capas e acessórios pensados como peças de coleção.
-              Editorial. Vibrante. Inesquecível.
+              Acessórios perfumados a limão. A nova sub-marca da{" "}
+              <span className="text-sqz-ink font-medium">Lemon Jelly</span>,
+              criada pelo grupo Procalçado em Vila Nova de Gaia.
             </motion.p>
           </div>
 
@@ -156,7 +157,7 @@ export default function Home() {
           </div>
           <div className="hidden sm:block text-right">
             <p className="text-[10px] tracking-[0.3em] uppercase text-sqz-mute mb-1 font-semibold">
-              SQUIZZ · the act of squeezing colour into life
+              SQUIZZ · perfumed accessories. made in Portugal.
             </p>
             <p className="font-serif-italic text-2xl text-sqz-ink/90">
               fresh, never sour.
