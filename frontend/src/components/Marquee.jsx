@@ -1,24 +1,31 @@
-import React from "react";
+export default function Marquee({ words = [], speedSec = 38 }) {
+  const phrase = (
+    <span className="flex items-center gap-10 whitespace-nowrap pr-10">
+      {words.map((w, i) => (
+        <span key={i} className="flex items-center gap-10">
+          <span
+            className={`font-display text-[10vw] sm:text-[8vw] leading-none ${
+              i % 2 === 0 ? "" : "italic"
+            }`}
+          >
+            {w}
+          </span>
+          <span className="w-2 h-2 rounded-full bg-sqz-accent shrink-0" aria-hidden="true" />
+        </span>
+      ))}
+    </span>
+  );
 
-export default function Marquee({ items, bg = "#151515", color = "#FBD503" }) {
-  const content = items.join("   •   ");
   return (
-    <div
-      className="w-full overflow-hidden border-y-[3px] border-sqz-ink py-4"
-      style={{ background: bg }}
+    <section
+      className="border-y border-sqz-line py-6 sm:py-10 overflow-hidden"
       data-testid="marquee"
     >
-      <div className="flex gap-12 whitespace-nowrap marquee-track">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <span
-            key={i}
-            className="font-display font-bold text-3xl sm:text-5xl"
-            style={{ color }}
-          >
-            {content}
-          </span>
-        ))}
+      <div className="flex marquee-track" style={{ animationDuration: `${speedSec}s` }}>
+        {phrase}
+        {phrase}
+        {phrase}
       </div>
-    </div>
+    </section>
   );
 }

@@ -1,98 +1,170 @@
-import React from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
-// Lemon SVG with squeeze + juice drops animation. Pure SVG/CSS.
-export default function LemonSqueezeAnim() {
-  const drops = Array.from({ length: 6 });
+/**
+ * Cinematic SVG lemon — slow squeeze, juice stream draws on path,
+ * droplets cascade. No emojis, no faces. Editorial monochrome with citrus accent.
+ */
+export default function CinematicLemon() {
+  const [phase, setPhase] = useState(0); // 0 idle, 1 squeezing, 2 drip
+  useEffect(() => {
+    let mounted = true;
+    let t1, t2, t3;
+    const cycle = () => {
+      if (!mounted) return;
+      setPhase(0);
+      t1 = setTimeout(() => mounted && setPhase(1), 800);
+      t2 = setTimeout(() => mounted && setPhase(2), 2400);
+      t3 = setTimeout(cycle, 5800);
+    };
+    cycle();
+    return () => {
+      mounted = false;
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+    };
+  }, []);
+
   return (
-    <div className="relative w-full h-full flex items-center justify-center" data-testid="lemon-squeeze-anim">
-      {/* Hand 1 left */}
-      <motion.div
-        initial={{ x: -40, rotate: -20 }}
-        animate={{ x: [-40, 0, -40], rotate: [-20, -5, -20] }}
-        transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute left-2 sm:left-6 top-6 z-20 text-5xl sm:text-7xl"
-        style={{ filter: "drop-shadow(3px 3px 0 #151515)" }}
+    <div
+      className="relative w-full h-full flex items-center justify-center"
+      data-testid="lemon-squeeze-anim"
+    >
+      <svg
+        viewBox="0 0 600 700"
+        className="w-full h-full max-w-[640px]"
+        aria-hidden="true"
       >
-        <span role="img" aria-label="hand-left">👈</span>
-      </motion.div>
-      {/* Hand 2 right */}
-      <motion.div
-        initial={{ x: 40, rotate: 20 }}
-        animate={{ x: [40, 0, 40], rotate: [20, 5, 20] }}
-        transition={{ duration: 3.6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute right-2 sm:right-6 top-6 z-20 text-5xl sm:text-7xl"
-        style={{ filter: "drop-shadow(3px 3px 0 #151515)" }}
-      >
-        <span role="img" aria-label="hand-right">👉</span>
-      </motion.div>
+        <defs>
+          <radialGradient id="lemonGrad" cx="40%" cy="35%" r="70%">
+            <stop offset="0%" stopColor="#FFFCBE" />
+            <stop offset="55%" stopColor="#E5F33D" />
+            <stop offset="100%" stopColor="#9DA82B" />
+          </radialGradient>
+          <radialGradient id="highlight" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.9)" />
+            <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+          </radialGradient>
+          <linearGradient id="juiceGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#FFFCBE" stopOpacity="0.0" />
+            <stop offset="20%" stopColor="#E5F33D" stopOpacity="1" />
+            <stop offset="100%" stopColor="#E5F33D" stopOpacity="0" />
+          </linearGradient>
+          <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="0.6" />
+          </filter>
+        </defs>
 
-      {/* Lemon body */}
-      <div className="relative animate-squeeze">
-        <svg
-          width="280"
-          height="240"
-          viewBox="0 0 280 240"
-          className="drop-shadow-[6px_6px_0_#151515]"
+        {/* glow plate */}
+        <ellipse
+          cx="300"
+          cy="600"
+          rx="220"
+          ry="22"
+          fill="#E5F33D"
+          opacity="0.18"
+          filter="url(#soft)"
+        />
+
+        {/* lemon body — soft squeeze on phase 1 */}
+        <g
+          style={{
+            transformOrigin: "300px 320px",
+            transition: "transform 1.1s cubic-bezier(.16,1,.3,1)",
+            transform:
+              phase === 1
+                ? "scaleX(1.10) scaleY(0.86) translateY(8px)"
+                : "scaleX(1) scaleY(1)",
+          }}
         >
           {/* leaf */}
-          <g transform="translate(140 18) rotate(-20)">
-            <path
-              d="M0 0 C 18 -22 60 -22 70 8 C 50 12 18 8 0 0 Z"
-              fill="#B2D801"
-              stroke="#151515"
-              strokeWidth="4"
-            />
-            <path d="M0 0 C 18 -8 40 -10 60 -4" stroke="#151515" strokeWidth="3" fill="none" />
-          </g>
-          {/* stem */}
-          <rect x="135" y="14" width="10" height="20" fill="#151515" rx="2" />
-          {/* lemon shape */}
-          <ellipse cx="140" cy="130" rx="115" ry="92" fill="#FBD503" stroke="#151515" strokeWidth="6" />
-          {/* highlight */}
-          <ellipse cx="95" cy="95" rx="22" ry="12" fill="#FFF2A8" opacity="0.9" transform="rotate(-25 95 95)" />
-          {/* bumps to the right */}
           <path
-            d="M252 110 q 12 18 -2 38"
-            stroke="#151515"
-            strokeWidth="4"
+            d="M300 120 C 360 70 460 80 480 140 C 430 160 360 145 300 130 Z"
+            fill="#0A0A0A"
+            stroke="#E5F33D"
+            strokeWidth="1.5"
+            opacity="0.85"
+          />
+          {/* stem */}
+          <rect x="294" y="118" width="12" height="22" rx="3" fill="#0A0A0A" />
+          {/* lemon */}
+          <ellipse
+            cx="300"
+            cy="320"
+            rx="190"
+            ry="160"
+            fill="url(#lemonGrad)"
+          />
+          <ellipse cx="300" cy="320" rx="190" ry="160" fill="none" stroke="#0A0A0A" strokeOpacity="0.18" strokeWidth="1.5" />
+          {/* highlight */}
+          <ellipse cx="220" cy="240" rx="60" ry="32" fill="url(#highlight)" />
+          {/* tip right */}
+          <path
+            d="M488 320 q 32 22 -2 56"
+            stroke="#0A0A0A"
+            strokeOpacity="0.35"
+            strokeWidth="1.5"
             fill="none"
             strokeLinecap="round"
           />
-          {/* face */}
-          <circle cx="105" cy="135" r="5" fill="#151515" />
-          <circle cx="175" cy="135" r="5" fill="#151515" />
-          <path d="M115 165 q 25 22 50 0" stroke="#151515" strokeWidth="5" fill="none" strokeLinecap="round" />
-          {/* pink cheeks */}
-          <circle cx="92" cy="155" r="9" fill="#FC6CA7" opacity="0.8" />
-          <circle cx="190" cy="155" r="9" fill="#FC6CA7" opacity="0.8" />
-        </svg>
+        </g>
 
-        {/* Juice drops */}
-        <div className="absolute left-1/2 -translate-x-1/2 bottom-0 flex gap-1 pointer-events-none">
-          {drops.map((_, i) => (
-            <span
-              key={i}
-              className="juice-drop block w-3 h-4 rounded-full"
-              style={{
-                background: "#FBD503",
-                border: "2px solid #151515",
-                animationDelay: `${0.2 * i}s`,
-              }}
-            />
-          ))}
-        </div>
+        {/* juice stream — draws on phase 1/2 */}
+        <path
+          d="M300 480 C 300 540, 300 580, 300 640"
+          stroke="url(#juiceGrad)"
+          strokeWidth="6"
+          fill="none"
+          strokeLinecap="round"
+          strokeDasharray="200"
+          strokeDashoffset={phase === 0 ? 200 : 0}
+          style={{
+            transition: "stroke-dashoffset 1.3s cubic-bezier(.16,1,.3,1)",
+          }}
+        />
+
+        {/* droplets */}
+        {[0, 1, 2, 3, 4].map((i) => (
+          <circle
+            key={i}
+            cx={300 + (i - 2) * 14}
+            cy={650}
+            r={i === 2 ? 5 : 3}
+            fill="#E5F33D"
+            opacity={phase === 2 ? 1 : 0}
+            style={{
+              transformOrigin: "center",
+              transition: `transform 1.6s cubic-bezier(.16,1,.3,1) ${i * 0.08}s, opacity .6s ease ${i * 0.08}s`,
+              transform:
+                phase === 2
+                  ? `translateY(${20 + i * 6}px) scale(1)`
+                  : "translateY(-10px) scale(0.4)",
+            }}
+          />
+        ))}
+
+        {/* refined caption inside SVG */}
+        <text
+          x="300"
+          y="60"
+          textAnchor="middle"
+          fill="#A3A3A3"
+          fontFamily="Manrope, sans-serif"
+          fontSize="11"
+          letterSpacing="3"
+        >
+          {phase === 0 ? "I D L E" : phase === 1 ? "S Q U E E Z E" : "D R I P"}
+        </text>
+      </svg>
+
+      {/* corner timecode */}
+      <div className="absolute bottom-4 left-4 text-[10px] tracking-[0.3em] uppercase text-sqz-mute font-mono">
+        SQZ · 00:0{phase === 0 ? 1 : phase === 1 ? 2 : 3}
       </div>
-
-      {/* SQUEEZE! sticker */}
-      <motion.div
-        initial={{ scale: 0, rotate: -10 }}
-        animate={{ scale: [1, 1.1, 1], rotate: [-10, -6, -10] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute -top-2 right-4 sm:right-12 bg-[#FC6CA7] text-white font-display font-bold text-xl sm:text-2xl px-4 py-1 rounded-full btl shadow-brutal-sm"
-      >
-        SQZ them!
-      </motion.div>
+      <div className="absolute top-4 right-4 flex items-center gap-2 text-[10px] tracking-[0.3em] uppercase text-sqz-accent">
+        <span className="w-1.5 h-1.5 rounded-full bg-sqz-accent animate-pulse" />
+        live
+      </div>
     </div>
   );
 }

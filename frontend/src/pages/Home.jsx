@@ -1,239 +1,340 @@
-import React from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import LemonSqueezeAnim from "../components/LemonSqueezeAnim";
 import Marquee from "../components/Marquee";
 import ProductCard from "../components/ProductCard";
-import { FEATURED } from "../data/products";
+import Reveal from "../components/Reveal";
+import { FEATURED, PRODUCTS } from "../data/products";
+
+const HERO_BG =
+  "https://static.prod-images.emergentagent.com/jobs/e6ec786c-b304-44d9-acf3-0723c56bac93/images/b816fb9ac314b02f960c0373bc71de978b3ffc7130791a67b032bbbc3c3e2acd.png";
+const EDITORIAL_IMG =
+  "https://static.prod-images.emergentagent.com/jobs/e6ec786c-b304-44d9-acf3-0723c56bac93/images/6501825d13b48f6769855232cf2d7b5e1fe8f564e4603c3bbde86e2416d6cf8d.png";
 
 export default function Home() {
-  return (
-    <main data-testid="home-page">
-      {/* HERO */}
-      <section className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Left: text */}
-          <div className="relative">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-block bg-sqz-pink text-white btl rounded-full px-4 py-1 font-display font-bold uppercase tracking-wider text-sm shadow-brutal-sm"
-              data-testid="hero-tag"
-            >
-              squiiz by Lemon Jelly
-            </motion.div>
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroBgY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const heroBgScale = useTransform(scrollYProgress, [0, 1], [1.05, 1.2]);
+  const heroTextY = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
+  // Sobre Nós sticky scroll
+  const sobreRef = useRef(null);
+  const { scrollYProgress: sobreProg } = useScroll({
+    target: sobreRef,
+    offset: ["start end", "end start"],
+  });
+  const sobreImgY = useTransform(sobreProg, [0, 1], ["-12%", "12%"]);
+
+  return (
+    <div data-testid="home-page">
+      {/* HERO */}
+      <section
+        ref={heroRef}
+        className="relative h-[110vh] sm:h-[120vh] overflow-hidden"
+        data-testid="hero"
+      >
+        {/* Parallax background image */}
+        <motion.div
+          style={{ y: heroBgY, scale: heroBgScale }}
+          className="absolute inset-0"
+        >
+          <img
+            src={HERO_BG}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-sqz-bg/70 via-sqz-bg/30 to-sqz-bg" />
+          <div className="absolute inset-0 bg-gradient-to-r from-sqz-bg/60 via-transparent to-sqz-bg/60" />
+        </motion.div>
+
+        {/* HUD top */}
+        <div className="absolute top-20 inset-x-0 px-6 lg:px-12 flex justify-between text-[10px] tracking-[0.3em] uppercase text-sqz-mute z-20">
+          <span>Lisboa · 38.7223° N</span>
+          <span>Vol. 01 · 2026</span>
+        </div>
+
+        {/* Hero content */}
+        <motion.div
+          style={{ y: heroTextY, opacity: heroOpacity }}
+          className="relative z-10 h-full flex flex-col justify-center max-w-[1600px] mx-auto px-6 lg:px-12"
+        >
+          <div className="overflow-hidden">
+            <motion.p
+              initial={{ y: "110%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+              className="text-[10px] tracking-[0.4em] uppercase text-sqz-accent mb-6"
+            >
+              squiiz · by Lemon Jelly
+            </motion.p>
+          </div>
+
+          <div className="overflow-hidden">
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="font-display font-bold text-7xl sm:text-8xl lg:text-[10rem] leading-[0.85] mt-4 text-sqz-ink"
+              initial={{ y: "110%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
+              className="font-display text-[22vw] sm:text-[18vw] lg:text-[15vw] leading-[0.82] tracking-tightest"
               data-testid="hero-title"
             >
-              SQ
-              <span className="text-sqz-pink">Z</span>
-              <span className="block text-outline">SQUIZZ!</span>
+              S<span className="italic text-sqz-accent">Q</span>Z
             </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-              className="font-display text-2xl sm:text-3xl lg:text-4xl mt-6 text-sqz-ink/90"
-              data-testid="hero-slogan"
-            >
-              When life gives you lemon
-              <span className="text-sqz-pink">...</span>
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.45 }}
-              className="text-base sm:text-lg max-w-md mt-3 text-sqz-ink/80 font-body"
-            >
-              ...nós fazemos bijutaria, capas e acessórios cheios de cor e
-              boa-disposição. Espreme a tua personalidade.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-8 flex flex-wrap gap-4"
-            >
-              <Link
-                to="/produtos"
-                className="bg-sqz-pink text-white btl rounded-full px-7 py-3 font-display font-bold text-lg sm:text-xl uppercase tracking-wider shadow-brutal-sm hover:-translate-y-1 hover:shadow-brutal transition-all"
-                data-testid="hero-cta-produtos"
-              >
-                Ver Produtos →
-              </Link>
-              <a
-                href="#sobre"
-                className="bg-white text-sqz-ink btl rounded-full px-7 py-3 font-display font-bold text-lg sm:text-xl uppercase tracking-wider shadow-brutal-sm hover:-translate-y-1 hover:shadow-brutal transition-all"
-                data-testid="hero-cta-sobre"
-              >
-                Sobre Nós
-              </a>
-            </motion.div>
-
-            {/* Sticker decoration */}
-            <motion.div
-              animate={{ rotate: [-6, 6, -6] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -top-6 right-0 sm:right-8 lg:right-0 bg-sqz-blue text-white btl rounded-2xl px-4 py-2 font-display font-bold text-sm sm:text-base shadow-brutal-sm hidden sm:block"
-              data-testid="hero-sticker"
-            >
-              🍋 100% suminho
-            </motion.div>
           </div>
 
-          {/* Right: lemon animation card */}
-          <div className="relative">
-            <div
-              className="relative bg-sqz-yellow btl rounded-3xl shadow-brutal-lg p-6 sm:p-10 aspect-square sm:aspect-auto sm:min-h-[480px] overflow-hidden"
-              data-testid="hero-lemon-card"
-            >
-              {/* polka dot bg */}
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 opacity-30"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(#151515 1.5px, transparent 1.5px)",
-                  backgroundSize: "22px 22px",
-                }}
-              />
-              <div className="relative h-full flex items-center justify-center">
-                <LemonSqueezeAnim />
-              </div>
-              <div className="absolute bottom-4 left-4 bg-white btl rounded-full px-4 py-1 font-display font-bold text-xs sm:text-sm shadow-brutal-sm">
-                ▶ animação ao vivo
-              </div>
+          <div className="mt-6 grid lg:grid-cols-12 gap-8 items-end">
+            <div className="lg:col-span-5 overflow-hidden">
+              <motion.p
+                initial={{ y: "110%" }}
+                animate={{ y: 0 }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
+                className="font-display text-3xl sm:text-4xl lg:text-5xl leading-tight"
+                data-testid="hero-slogan"
+              >
+                When life gives you{" "}
+                <span className="italic text-sqz-accent">lemon</span>
+                <span>...</span>
+              </motion.p>
+            </div>
+            <div className="lg:col-span-4 lg:col-start-9 overflow-hidden">
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.85 }}
+                className="text-sqz-mute font-light max-w-md"
+              >
+                Bijutaria, capas e acessórios pensados como peças de coleção.
+                Editorial. Vibrante. Inesquecível.
+              </motion.p>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* MARQUEE */}
-      <Marquee
-        items={[
-          "SQUEEEZE!",
-          "SQZ THEM!",
-          "WHEN LIFE GIVES YOU LEMON...",
-          "🍋",
-          "SQUIZZ",
-          "by Lemon Jelly",
-        ]}
-        bg="#151515"
-        color="#FBD503"
-      />
-
-      {/* SOBRE NÓS */}
-      <section
-        id="sobre"
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24"
-        data-testid="sobre-section"
-      >
-        <div className="grid lg:grid-cols-5 gap-8 items-stretch">
-          <div className="lg:col-span-2 bg-sqz-pink text-white btl rounded-3xl p-8 shadow-brutal flex flex-col justify-between">
-            <div>
-              <span className="inline-block bg-white text-sqz-ink btl rounded-full px-3 py-1 font-display font-bold text-xs uppercase tracking-wider">
-                Sobre Nós
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 1.05 }}
+            className="mt-12 flex flex-wrap gap-3 sm:gap-4"
+          >
+            <Link
+              to="/produtos"
+              className="group relative inline-flex items-center gap-3 px-7 py-4 bg-sqz-accent text-sqz-bg uppercase text-xs tracking-[0.25em] font-semibold hover:bg-sqz-ink transition-colors"
+              data-testid="hero-cta-produtos"
+            >
+              Explorar Coleção
+              <span className="inline-block transition-transform group-hover:translate-x-1">
+                →
               </span>
-              <h2 className="font-display font-bold text-5xl sm:text-6xl mt-4 leading-none">
-                Olá, somos a <span className="text-sqz-yellow">SQZ</span>!
-              </h2>
-            </div>
-            <p className="font-display text-xl mt-6 opacity-90">
-              Acreditamos que a vida deve ser tão colorida como uma limonada
-              fresquinha 🍋
+            </Link>
+            <a
+              href="#sobre"
+              className="inline-flex items-center gap-3 px-7 py-4 border border-sqz-line text-sqz-ink uppercase text-xs tracking-[0.25em] hover:border-sqz-accent hover:text-sqz-accent transition-colors"
+              data-testid="hero-cta-sobre"
+            >
+              Sobre Nós
+            </a>
+          </motion.div>
+        </motion.div>
+
+        {/* Bottom HUD */}
+        <div className="absolute bottom-10 inset-x-0 px-6 lg:px-12 flex justify-between items-end z-20">
+          <div className="text-[10px] tracking-[0.3em] uppercase text-sqz-mute">
+            <span className="block">Scroll</span>
+            <span className="block w-px h-10 bg-sqz-line mt-2 ml-2" />
+          </div>
+          <div className="hidden sm:block text-right">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-sqz-mute mb-1">
+              SQUIZZ · the act of squeezing colour into life
+            </p>
+            <p className="font-italic-serif text-2xl text-sqz-ink/90">
+              fresh, never sour.
             </p>
           </div>
-
-          <div className="lg:col-span-3 grid sm:grid-cols-2 gap-6">
-            <div className="bg-white btl rounded-3xl p-6 shadow-brutal">
-              <div className="w-12 h-12 rounded-full bg-sqz-blue btl flex items-center justify-center font-display font-bold text-white text-xl mb-3">
-                01
-              </div>
-              <h3 className="font-display font-bold text-2xl mb-2">A vibe</h3>
-              <p className="text-sqz-ink/80">
-                Cores fortes, peças divertidas e um sorriso garantido sempre que
-                te olhares ao espelho.
-              </p>
-            </div>
-            <div className="bg-sqz-yellow btl rounded-3xl p-6 shadow-brutal">
-              <div className="w-12 h-12 rounded-full bg-sqz-ink text-sqz-yellow btl flex items-center justify-center font-display font-bold text-xl mb-3">
-                02
-              </div>
-              <h3 className="font-display font-bold text-2xl mb-2">A magia</h3>
-              <p className="text-sqz-ink">
-                Cada peça é pensada para espremer ao máximo a tua personalidade.
-                Sem medo. Sem regras.
-              </p>
-            </div>
-            <div className="bg-sqz-green btl rounded-3xl p-6 shadow-brutal">
-              <div className="w-12 h-12 rounded-full bg-white btl flex items-center justify-center font-display font-bold text-xl mb-3">
-                03
-              </div>
-              <h3 className="font-display font-bold text-2xl mb-2">A missão</h3>
-              <p className="text-sqz-ink">
-                Transformar dias cinzentos em dias amarelos. Quando a vida te
-                dá limões... <span className="font-bold">SQZ them!</span>
-              </p>
-            </div>
-            <div className="bg-sqz-lavender btl rounded-3xl p-6 shadow-brutal">
-              <div className="w-12 h-12 rounded-full bg-sqz-pink text-white btl flex items-center justify-center font-display font-bold text-xl mb-3">
-                04
-              </div>
-              <h3 className="font-display font-bold text-2xl mb-2">O squiiz</h3>
-              <p className="text-sqz-ink">
-                Inspirado no espírito{" "}
-                <span className="font-bold">"squiiz by Lemon Jelly"</span> —
-                pop, brincalhão e sempre fora da caixa.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* FEATURED PRODUCTS */}
-      <section
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16"
-        data-testid="featured-section"
-      >
-        <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
-          <div>
-            <span className="inline-block bg-sqz-blue text-white btl rounded-full px-3 py-1 font-display font-bold text-xs uppercase tracking-wider shadow-brutal-sm">
-              SQZ Picks
-            </span>
-            <h2 className="font-display font-bold text-5xl sm:text-7xl leading-none mt-3">
-              Frescos & <span className="text-sqz-pink">sumarentos</span>
-            </h2>
-          </div>
-          <Link
-            to="/produtos"
-            className="bg-sqz-ink text-sqz-yellow btl rounded-full px-6 py-3 font-display font-bold uppercase tracking-wider shadow-brutal-sm hover:-translate-y-1 transition-transform"
-            data-testid="featured-view-all"
-          >
-            Ver tudo →
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-          {FEATURED.slice(0, 8).map((p, i) => (
-            <ProductCard key={p.id} product={p} index={i} />
-          ))}
-        </div>
-      </section>
-
-      {/* Bottom marquee */}
+      {/* MARQUEE 1 */}
       <Marquee
-        items={["🍋", "SQUEEEZE EVERYTHING", "🍋", "FRESH DROP", "🍋", "SQZ x YOU"]}
-        bg="#FC6CA7"
-        color="#FFFFFF"
+        words={["SQUIZZ", "When life gives you lemon", "SQZ them", "Edition 2026", "squiiz"]}
+        speedSec={42}
       />
-    </main>
+
+      {/* CINEMATIC LEMON SECTION (sticky pinned) */}
+      <section className="relative bg-sqz-bg" data-testid="lemon-section">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-24 sm:py-40 grid lg:grid-cols-12 gap-12 items-center">
+          <Reveal className="lg:col-span-6 order-2 lg:order-1">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-sqz-accent mb-5">
+              Filosofia · 01
+            </p>
+            <h2 className="font-display text-5xl sm:text-7xl leading-[0.95] tracking-tightest">
+              Espremer<br />a essência<br />
+              <span className="italic text-sqz-accent">do dia.</span>
+            </h2>
+            <p className="text-sqz-mute font-light max-w-md mt-8 leading-relaxed">
+              Pegamos numa fruta e fazemos dela manifesto. Cada peça SQZ é um gesto
+              — pequeno, ácido, brilhante — para tornar o ordinário em extraordinário.
+              <span className="block mt-4 font-italic-serif text-sqz-ink text-xl">
+                squiiz · the squeeze of style.
+              </span>
+            </p>
+          </Reveal>
+
+          <div className="lg:col-span-6 order-1 lg:order-2 relative">
+            <div className="relative aspect-square bg-sqz-surface border border-sqz-line overflow-hidden">
+              <div className="absolute inset-0 p-6 sm:p-10">
+                <LemonSqueezeAnim />
+              </div>
+              {/* corner ticks */}
+              <span className="absolute top-0 left-0 w-3 h-3 border-t border-l border-sqz-accent" />
+              <span className="absolute top-0 right-0 w-3 h-3 border-t border-r border-sqz-accent" />
+              <span className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-sqz-accent" />
+              <span className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-sqz-accent" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SOBRE NÓS - editorial split with sticky image */}
+      <section
+        id="sobre"
+        ref={sobreRef}
+        className="relative border-t border-sqz-line"
+        data-testid="sobre-section"
+      >
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-24 sm:py-40 grid lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-5 lg:sticky lg:top-32 self-start">
+            <div className="relative aspect-[4/5] overflow-hidden bg-sqz-surface">
+              <motion.img
+                src={EDITORIAL_IMG}
+                alt="Editorial SQZ"
+                style={{ y: sobreImgY }}
+                className="absolute inset-0 w-full h-[120%] object-cover"
+              />
+              <div className="absolute inset-0 ring-1 ring-sqz-line" />
+              <span className="absolute bottom-4 left-4 text-[10px] tracking-[0.3em] uppercase text-sqz-ink/80">
+                Editorial · SS26
+              </span>
+            </div>
+          </div>
+
+          <div className="lg:col-span-6 lg:col-start-7 space-y-16">
+            <div>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-sqz-accent mb-5">
+                Sobre Nós
+              </p>
+              <h2 className="font-display text-6xl sm:text-7xl lg:text-8xl leading-[0.92] tracking-tightest">
+                Somos a <span className="italic">SQZ</span>.<br />
+                Fazemos cor.
+              </h2>
+            </div>
+
+            <Reveal className="space-y-6 text-sqz-mute font-light text-lg leading-relaxed max-w-xl">
+              <p>
+                A SQZ nasceu da ideia simples de que um acessório deve fazer
+                falar. Não é decoração — é declaração.
+              </p>
+              <p>
+                Inspiradas pelo espírito{" "}
+                <span className="text-sqz-ink font-italic-serif text-xl">
+                  squiiz by Lemon Jelly
+                </span>
+                , trabalhamos a bijutaria, as capas e os acessórios como
+                fragmentos de uma editorial: pensados, fotografados e curados
+                para quem prefere a personalidade ao algoritmo.
+              </p>
+            </Reveal>
+
+            <div className="grid grid-cols-2 gap-x-10 gap-y-12 pt-8 border-t border-sqz-line">
+              {[
+                ["01", "Coleção curada", "Cada peça é selecionada à mão. Sem catálogos infinitos."],
+                ["02", "Cor com intenção", "Trabalhamos a cor como tinta de pintor — direta, viva, segura."],
+                ["03", "Made for you", "Pensamos em quem usa: quem espreme tudo o que a vida tem para dar."],
+                ["04", "Estúdio Lisboa", "Concebido e fotografado em estúdio próprio na cidade da luz."],
+              ].map(([n, t, d]) => (
+                <Reveal key={n} delay={parseInt(n) * 0.05}>
+                  <p className="text-[10px] tracking-[0.3em] uppercase text-sqz-accent">
+                    {n}
+                  </p>
+                  <h3 className="font-display text-3xl mt-2">{t}</h3>
+                  <p className="text-sqz-mute font-light mt-3 text-sm leading-relaxed">{d}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURED */}
+      <section className="border-t border-sqz-line" data-testid="featured-section">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-24 sm:py-32">
+          <div className="flex flex-wrap items-end justify-between gap-6 mb-16">
+            <div>
+              <p className="text-[10px] tracking-[0.3em] uppercase text-sqz-accent mb-4">
+                Coleção · Em destaque
+              </p>
+              <h2 className="font-display text-6xl sm:text-7xl leading-none tracking-tightest">
+                As nossas <span className="italic">picks</span>.
+              </h2>
+            </div>
+            <Link
+              to="/produtos"
+              className="group inline-flex items-center gap-3 text-xs tracking-[0.25em] uppercase border-b border-sqz-line pb-1 hover:border-sqz-accent hover:text-sqz-accent transition-colors"
+              data-testid="featured-view-all"
+            >
+              Ver toda a coleção
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-16">
+            {FEATURED.slice(0, 8).map((p, i) => (
+              <Reveal key={p.id} delay={i * 0.06}>
+                <ProductCard product={p} index={i} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* MARQUEE BOTTOM */}
+      <Marquee
+        words={[
+          "SQUEEZE",
+          "the moment",
+          "SQUIZZ",
+          "into",
+          "every detail",
+          "—",
+          "SS 26",
+        ]}
+        speedSec={50}
+      />
+
+      {/* CTA STRIP */}
+      <section className="border-t border-sqz-line">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-24 sm:py-32 text-center">
+          <Reveal>
+            <p className="text-[10px] tracking-[0.3em] uppercase text-sqz-accent mb-6">
+              {PRODUCTS.length} peças · 5 categorias
+            </p>
+            <h2 className="font-display text-6xl sm:text-8xl lg:text-9xl leading-[0.85] tracking-tightest">
+              Toda a <span className="italic">coleção</span>,<br />
+              um <span className="text-sqz-accent">click</span> à frente.
+            </h2>
+            <Link
+              to="/produtos"
+              className="inline-flex items-center gap-3 mt-12 px-9 py-5 bg-sqz-accent text-sqz-bg uppercase text-xs tracking-[0.3em] font-semibold hover:bg-sqz-ink transition-colors"
+              data-testid="cta-explorar"
+            >
+              Explorar agora →
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+    </div>
   );
 }

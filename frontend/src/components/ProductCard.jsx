@@ -1,38 +1,53 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 export default function ProductCard({ product, index = 0 }) {
+  const num = String(index + 1).padStart(2, "0");
   return (
-    <article
-      className="group bg-white btl rounded-3xl overflow-hidden shadow-brutal flex flex-col hover:-translate-y-2 hover:shadow-brutal-lg transition-all"
+    <Link
+      to="/produtos"
+      className="group block relative"
       data-testid={`product-card-${product.id}`}
+      data-cursor-hover
     >
-      <div
-        className="aspect-square w-full border-b-[3px] border-sqz-ink overflow-hidden flex items-center justify-center relative"
-        style={{ background: `${product.color}33` }}
-      >
+      <div className="aspect-[4/5] w-full overflow-hidden bg-sqz-surface relative">
+        {/* product image */}
         <img
           src={product.image}
           alt={product.name}
           loading="lazy"
-          className="w-full h-full object-contain p-3 group-hover:scale-105 transition-transform duration-300"
+          className="absolute inset-0 w-full h-full object-contain p-6 sm:p-10 transition-transform duration-[1200ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.05]"
         />
+        {/* color tint glow on hover */}
+        <div
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none mix-blend-screen"
+          style={{
+            background: `radial-gradient(120% 120% at 50% 60%, ${product.color}33 0%, transparent 60%)`,
+          }}
+          aria-hidden="true"
+        />
+        <span className="absolute top-4 left-4 text-[10px] tracking-[0.25em] uppercase text-sqz-mute">
+          {num}
+        </span>
         {product.featured && (
           <span
-            className="absolute top-3 left-3 bg-sqz-yellow btl rounded-full px-3 py-1 font-display font-bold text-xs uppercase tracking-wider shadow-brutal-sm"
+            className="absolute top-4 right-4 text-[10px] tracking-[0.25em] uppercase text-sqz-accent"
             data-testid={`featured-badge-${product.id}`}
           >
-            ⭐ SQZ Pick
+            ◇ Pick
           </span>
         )}
       </div>
-      <div className="p-4 sm:p-5 flex flex-col gap-1 bg-white">
-        <h3 className="font-display font-bold text-lg sm:text-xl leading-tight" data-testid={`product-name-${product.id}`}>
+      <div className="mt-4 flex items-baseline justify-between gap-3">
+        <h3
+          className="font-display text-xl sm:text-2xl leading-tight"
+          data-testid={`product-name-${product.id}`}
+        >
           {product.name}
         </h3>
-        <span className="text-sm font-body font-semibold uppercase text-sqz-ink/60 tracking-wider">
+        <span className="text-[10px] tracking-[0.25em] uppercase text-sqz-mute">
           {product.category}
         </span>
       </div>
-    </article>
+    </Link>
   );
 }
