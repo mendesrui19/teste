@@ -13,18 +13,18 @@ export default function Produtos() {
   );
 
   return (
-    <div className="pt-32" data-testid="produtos-page">
+    <div className="pt-32 bg-sqz-bg" data-testid="produtos-page">
       {/* Header */}
       <header className="max-w-[1600px] mx-auto px-6 lg:px-12 pb-16 sm:pb-20">
         <Reveal>
-          <p className="text-[10px] tracking-[0.3em] uppercase text-sqz-accent mb-5">
+          <p className="text-[10px] tracking-[0.3em] uppercase text-sqz-ink mb-5">
             Catálogo · SS 26
           </p>
           <h1
-            className="font-display text-[18vw] sm:text-[12vw] lg:text-[10rem] leading-[0.82] tracking-tightest"
+            className="font-display text-[18vw] sm:text-[12vw] lg:text-[10rem] leading-[0.82] tracking-tightest text-sqz-ink"
             data-testid="produtos-title"
           >
-            Coleção <span className="italic text-sqz-accent">SQZ</span>
+            Coleção <span className="italic">SQZ</span>
           </h1>
           <p className="mt-6 text-sqz-mute font-light max-w-xl">
             {PRODUCTS.length} peças. 5 categorias. Uma única filosofia: espremer
@@ -36,7 +36,10 @@ export default function Produtos() {
       <div className="hairline max-w-[1600px] mx-auto" />
 
       {/* Filters */}
-      <div className="sticky top-16 z-40 bg-sqz-bg/85 backdrop-blur-xl border-b border-sqz-line" data-testid="filter-bar">
+      <div
+        className="sticky top-16 z-40 bg-sqz-bg/85 backdrop-blur-xl border-b border-sqz-line"
+        data-testid="filter-bar"
+      >
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-5 flex items-center gap-2 sm:gap-6 overflow-x-auto no-scroll-bar">
           {CATEGORIES.map((c) => {
             const isActive = active === c.id;
@@ -45,14 +48,14 @@ export default function Produtos() {
                 key={c.id}
                 onClick={() => setActive(c.id)}
                 className={`relative whitespace-nowrap text-xs tracking-[0.25em] uppercase py-2 px-1 transition-colors ${
-                  isActive ? "text-sqz-accent" : "text-sqz-mute hover:text-sqz-ink"
+                  isActive ? "text-sqz-ink" : "text-sqz-mute hover:text-sqz-ink"
                 }`}
                 data-testid={`filter-button-${c.id}`}
               >
                 {c.label}
                 <span
                   className={`absolute left-0 right-0 -bottom-1 h-px transition-all duration-500 ${
-                    isActive ? "bg-sqz-accent" : "bg-transparent"
+                    isActive ? "bg-sqz-ink" : "bg-transparent"
                   }`}
                 />
                 <span className="ml-2 text-[10px] text-sqz-mute/70">
@@ -99,8 +102,8 @@ export default function Produtos() {
       {/* End line */}
       <section className="border-t border-sqz-line">
         <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-24 text-center">
-          <p className="font-display text-5xl sm:text-7xl leading-tight tracking-tightest">
-            <span className="italic text-sqz-accent">Squizz.</span>{" "}
+          <p className="font-display text-5xl sm:text-7xl leading-tight tracking-tightest text-sqz-ink">
+            <span className="italic">Squizz.</span>{" "}
             <span className="text-sqz-mute">end of feed.</span>
           </p>
         </div>

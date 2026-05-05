@@ -24,12 +24,18 @@ export default function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         hidden ? "-translate-y-full" : "translate-y-0"
-      } ${scrolled ? "bg-black/70 backdrop-blur-xl border-b border-white/10" : "bg-transparent"}`}
+      } ${
+        scrolled
+          ? "bg-sqz-bg/85 backdrop-blur-xl border-b border-sqz-line"
+          : "bg-transparent"
+      }`}
       data-testid="navbar"
     >
       <div className="max-w-[1600px] mx-auto px-6 lg:px-12 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-baseline gap-2 group" data-testid="nav-logo-link">
-          <span className="font-display text-3xl leading-none tracking-tightest">SQZ</span>
+          <span className="font-display text-3xl leading-none tracking-tightest text-sqz-ink">
+            SQZ
+          </span>
           <span className="hidden sm:inline font-italic-serif text-[11px] text-sqz-mute tracking-wider">
             squiiz · by Lemon Jelly
           </span>
@@ -40,7 +46,11 @@ export default function Navbar() {
             to="/"
             end
             className={({ isActive }) =>
-              `${linkBase} ${isActive ? "text-sqz-accent" : "text-sqz-ink hover:text-sqz-accent"}`
+              `${linkBase} ${
+                isActive
+                  ? "text-sqz-ink after:scale-x-100"
+                  : "text-sqz-mute hover:text-sqz-ink"
+              } after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-px after:bg-sqz-ink after:scale-x-0 after:origin-left after:transition-transform after:duration-500`
             }
             data-testid="nav-link-inicio"
           >
@@ -49,7 +59,11 @@ export default function Navbar() {
           <NavLink
             to="/produtos"
             className={({ isActive }) =>
-              `${linkBase} ${isActive ? "text-sqz-accent" : "text-sqz-ink hover:text-sqz-accent"}`
+              `${linkBase} ${
+                isActive
+                  ? "text-sqz-ink after:scale-x-100"
+                  : "text-sqz-mute hover:text-sqz-ink"
+              } after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-px after:bg-sqz-ink after:scale-x-0 after:origin-left after:transition-transform after:duration-500`
             }
             data-testid="nav-link-produtos"
           >
@@ -57,7 +71,7 @@ export default function Navbar() {
           </NavLink>
           <a
             href="/#sobre"
-            className={`${linkBase} hidden md:inline text-sqz-ink hover:text-sqz-accent`}
+            className={`${linkBase} hidden md:inline text-sqz-mute hover:text-sqz-ink`}
             data-testid="nav-link-sobre"
           >
             Sobre Nós

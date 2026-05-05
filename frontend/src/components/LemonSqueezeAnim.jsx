@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 
 /**
- * Cinematic SVG lemon — slow squeeze, juice stream draws on path,
- * droplets cascade. No emojis, no faces. Editorial monochrome with citrus accent.
+ * Cinematic SVG lemon for LIGHT theme — slow squeeze, juice stream draws on path,
+ * droplets cascade. Uses warm citrus yellows for the lemon body and dark ink
+ * for line work + droplets accent.
  */
 export default function CinematicLemon() {
-  const [phase, setPhase] = useState(0); // 0 idle, 1 squeezing, 2 drip
+  const [phase, setPhase] = useState(0);
   useEffect(() => {
     let mounted = true;
     let t1, t2, t3;
@@ -36,37 +37,37 @@ export default function CinematicLemon() {
         aria-hidden="true"
       >
         <defs>
-          <radialGradient id="lemonGrad" cx="40%" cy="35%" r="70%">
-            <stop offset="0%" stopColor="#FFFCBE" />
-            <stop offset="55%" stopColor="#E5F33D" />
-            <stop offset="100%" stopColor="#9DA82B" />
+          <radialGradient id="lemonGradLight" cx="40%" cy="35%" r="70%">
+            <stop offset="0%" stopColor="#FFFCC8" />
+            <stop offset="55%" stopColor="#F0DC2E" />
+            <stop offset="100%" stopColor="#A89615" />
           </radialGradient>
-          <radialGradient id="highlight" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="rgba(255,255,255,0.9)" />
+          <radialGradient id="highlightLight" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.95)" />
             <stop offset="100%" stopColor="rgba(255,255,255,0)" />
           </radialGradient>
-          <linearGradient id="juiceGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#FFFCBE" stopOpacity="0.0" />
-            <stop offset="20%" stopColor="#E5F33D" stopOpacity="1" />
-            <stop offset="100%" stopColor="#E5F33D" stopOpacity="0" />
+          <linearGradient id="juiceGradLight" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#A89615" stopOpacity="0" />
+            <stop offset="20%" stopColor="#A89615" stopOpacity="0.85" />
+            <stop offset="100%" stopColor="#A89615" stopOpacity="0" />
           </linearGradient>
-          <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+          <filter id="softLight" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="0.6" />
           </filter>
         </defs>
 
-        {/* glow plate */}
+        {/* shadow plate */}
         <ellipse
           cx="300"
           cy="600"
           rx="220"
           ry="22"
-          fill="#E5F33D"
-          opacity="0.18"
-          filter="url(#soft)"
+          fill="#0A0A0A"
+          opacity="0.10"
+          filter="url(#softLight)"
         />
 
-        {/* lemon body — soft squeeze on phase 1 */}
+        {/* lemon body */}
         <g
           style={{
             transformOrigin: "300px 320px",
@@ -81,38 +82,40 @@ export default function CinematicLemon() {
           <path
             d="M300 120 C 360 70 460 80 480 140 C 430 160 360 145 300 130 Z"
             fill="#0A0A0A"
-            stroke="#E5F33D"
+            stroke="#0A0A0A"
             strokeWidth="1.5"
-            opacity="0.85"
           />
           {/* stem */}
           <rect x="294" y="118" width="12" height="22" rx="3" fill="#0A0A0A" />
           {/* lemon */}
+          <ellipse cx="300" cy="320" rx="190" ry="160" fill="url(#lemonGradLight)" />
           <ellipse
             cx="300"
             cy="320"
             rx="190"
             ry="160"
-            fill="url(#lemonGrad)"
+            fill="none"
+            stroke="#0A0A0A"
+            strokeOpacity="0.25"
+            strokeWidth="1.5"
           />
-          <ellipse cx="300" cy="320" rx="190" ry="160" fill="none" stroke="#0A0A0A" strokeOpacity="0.18" strokeWidth="1.5" />
           {/* highlight */}
-          <ellipse cx="220" cy="240" rx="60" ry="32" fill="url(#highlight)" />
+          <ellipse cx="220" cy="240" rx="60" ry="32" fill="url(#highlightLight)" />
           {/* tip right */}
           <path
             d="M488 320 q 32 22 -2 56"
             stroke="#0A0A0A"
-            strokeOpacity="0.35"
+            strokeOpacity="0.45"
             strokeWidth="1.5"
             fill="none"
             strokeLinecap="round"
           />
         </g>
 
-        {/* juice stream — draws on phase 1/2 */}
+        {/* juice stream */}
         <path
           d="M300 480 C 300 540, 300 580, 300 640"
-          stroke="url(#juiceGrad)"
+          stroke="url(#juiceGradLight)"
           strokeWidth="6"
           fill="none"
           strokeLinecap="round"
@@ -130,7 +133,7 @@ export default function CinematicLemon() {
             cx={300 + (i - 2) * 14}
             cy={650}
             r={i === 2 ? 5 : 3}
-            fill="#E5F33D"
+            fill="#A89615"
             opacity={phase === 2 ? 1 : 0}
             style={{
               transformOrigin: "center",
@@ -148,7 +151,7 @@ export default function CinematicLemon() {
           x="300"
           y="60"
           textAnchor="middle"
-          fill="#A3A3A3"
+          fill="#6B6B6B"
           fontFamily="Manrope, sans-serif"
           fontSize="11"
           letterSpacing="3"
@@ -161,8 +164,8 @@ export default function CinematicLemon() {
       <div className="absolute bottom-4 left-4 text-[10px] tracking-[0.3em] uppercase text-sqz-mute font-mono">
         SQZ · 00:0{phase === 0 ? 1 : phase === 1 ? 2 : 3}
       </div>
-      <div className="absolute top-4 right-4 flex items-center gap-2 text-[10px] tracking-[0.3em] uppercase text-sqz-accent">
-        <span className="w-1.5 h-1.5 rounded-full bg-sqz-accent animate-pulse" />
+      <div className="absolute top-4 right-4 flex items-center gap-2 text-[10px] tracking-[0.3em] uppercase text-sqz-ink">
+        <span className="w-1.5 h-1.5 rounded-full bg-sqz-ink animate-pulse" />
         live
       </div>
     </div>

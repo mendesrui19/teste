@@ -1,5 +1,4 @@
-// Subtle cinematic ambience: a few slow drifting lemon-yellow particles.
-// Replaces the playful "falling drops" component but stays soft and editorial.
+// Subtle ambient floating dots for light theme.
 import { useMemo } from "react";
 
 export default function AmbientParticles({ count = 8 }) {
@@ -25,10 +24,9 @@ export default function AmbientParticles({ count = 8 }) {
             top: `${p.top}%`,
             width: p.size,
             height: p.size,
-            background: "#E5F33D",
-            boxShadow: "0 0 12px rgba(229,243,61,0.6)",
+            background: "#0A0A0A",
             animation: `drift ${p.duration}s ease-in-out ${p.delay}s infinite alternate`,
-            opacity: 0.5,
+            opacity: 0.18,
           }}
         />
       ))}

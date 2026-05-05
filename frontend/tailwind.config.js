@@ -5,13 +5,13 @@ module.exports = {
     extend: {
       colors: {
         sqz: {
-          bg: "#0A0A0A",
-          surface: "#121212",
-          ink: "#F5F5F0",
-          mute: "#A3A3A3",
-          line: "rgba(255,255,255,0.10)",
-          accent: "#E5F33D",
-          accent2: "#D4E129",
+          bg: "#FAFAF7",
+          surface: "#F1F0EB",
+          ink: "#0A0A0A",
+          mute: "#6B6B6B",
+          line: "rgba(10,10,10,0.10)",
+          accent: "#9DAA10",
+          accent2: "#B5C800",
         },
       },
       fontFamily: {

@@ -1,13 +1,16 @@
 export default function Footer() {
   return (
-    <footer className="relative bg-sqz-bg border-t border-sqz-line mt-32" data-testid="footer">
+    <footer
+      className="relative bg-sqz-bg border-t border-sqz-line mt-32"
+      data-testid="footer"
+    >
       <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-20 sm:py-28">
         <div className="grid lg:grid-cols-12 gap-12 items-end">
           <div className="lg:col-span-7">
             <p className="text-[10px] tracking-[0.3em] uppercase text-sqz-mute mb-4">
               squiiz · by Lemon Jelly
             </p>
-            <h3 className="font-display text-[18vw] lg:text-[14rem] leading-[0.85] tracking-tightest">
+            <h3 className="font-display text-[18vw] lg:text-[14rem] leading-[0.85] tracking-tightest text-sqz-ink">
               S<span className="italic">Q</span>Z
             </h3>
           </div>
@@ -30,7 +33,7 @@ export default function Footer() {
               </p>
               <a
                 href="mailto:hello@sqz.pt"
-                className="text-sqz-ink hover:text-sqz-accent transition-colors text-lg"
+                className="text-sqz-ink hover:text-sqz-mute transition-colors text-lg border-b border-sqz-line pb-1"
                 data-testid="footer-contact-btn"
               >
                 hello@sqz.pt
