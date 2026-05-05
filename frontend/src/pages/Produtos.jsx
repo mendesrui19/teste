@@ -4,6 +4,15 @@ import ProductCard from "../components/ProductCard";
 import Reveal from "../components/Reveal";
 import { CATEGORIES, PRODUCTS } from "../data/products";
 
+const CATEGORY_COLORS = {
+  all: "#FBD503",
+  colares: "#FC6CA7",
+  brincos: "#6889EC",
+  aneis: "#B2D801",
+  capas: "#D0B2FF",
+  acessorios: "#FE8E04",
+};
+
 export default function Produtos() {
   const [active, setActive] = useState("all");
 
@@ -12,23 +21,32 @@ export default function Produtos() {
     [active]
   );
 
+  const accent = CATEGORY_COLORS[active] || "#FBD503";
+
   return (
     <div className="pt-32 bg-sqz-bg" data-testid="produtos-page">
       {/* Header */}
       <header className="max-w-[1600px] mx-auto px-6 lg:px-12 pb-16 sm:pb-20">
         <Reveal>
-          <p className="text-[10px] tracking-[0.3em] uppercase text-sqz-ink mb-5">
+          <p className="text-[10px] tracking-[0.3em] uppercase text-sqz-pink mb-5 font-bold">
             Catálogo · SS 26
           </p>
           <h1
-            className="font-display text-[18vw] sm:text-[12vw] lg:text-[10rem] leading-[0.82] tracking-tightest text-sqz-ink"
+            className="font-display text-[20vw] sm:text-[14vw] lg:text-[11rem] leading-[0.82] tracking-tightest text-sqz-ink"
             data-testid="produtos-title"
           >
-            Coleção <span className="italic">SQZ</span>
+            Coleção{" "}
+            <span
+              className="text-sqz-yellow"
+              style={{ WebkitTextStroke: "3px #0a0a0a" }}
+            >
+              SQZ
+            </span>
           </h1>
-          <p className="mt-6 text-sqz-mute font-light max-w-xl">
-            {PRODUCTS.length} peças. 5 categorias. Uma única filosofia: espremer
-            cor, atitude e personalidade em cada detalhe.
+          <p className="mt-6 text-sqz-ink font-light max-w-xl text-base sm:text-lg">
+            <span className="font-display text-sqz-pink">{PRODUCTS.length} peças.</span>{" "}
+            5 categorias. Uma única filosofia: espremer cor, atitude e
+            personalidade em cada detalhe.
           </p>
         </Reveal>
       </header>
@@ -37,28 +55,27 @@ export default function Produtos() {
 
       {/* Filters */}
       <div
-        className="sticky top-16 z-40 bg-sqz-bg/85 backdrop-blur-xl border-b border-sqz-line"
+        className="sticky top-16 z-40 bg-sqz-bg/90 backdrop-blur-xl border-b border-sqz-line"
         data-testid="filter-bar"
       >
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-5 flex items-center gap-2 sm:gap-6 overflow-x-auto no-scroll-bar">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-5 flex items-center gap-2 sm:gap-4 overflow-x-auto no-scroll-bar">
           {CATEGORIES.map((c) => {
             const isActive = active === c.id;
+            const color = CATEGORY_COLORS[c.id];
             return (
               <button
                 key={c.id}
                 onClick={() => setActive(c.id)}
-                className={`relative whitespace-nowrap text-xs tracking-[0.25em] uppercase py-2 px-1 transition-colors ${
-                  isActive ? "text-sqz-ink" : "text-sqz-mute hover:text-sqz-ink"
+                className={`relative whitespace-nowrap text-xs tracking-[0.25em] uppercase py-2 px-4 transition-all font-bold border-2 ${
+                  isActive
+                    ? "text-sqz-ink border-sqz-ink"
+                    : "text-sqz-mute border-transparent hover:text-sqz-ink hover:border-sqz-ink/30"
                 }`}
+                style={isActive ? { background: color } : {}}
                 data-testid={`filter-button-${c.id}`}
               >
                 {c.label}
-                <span
-                  className={`absolute left-0 right-0 -bottom-1 h-px transition-all duration-500 ${
-                    isActive ? "bg-sqz-ink" : "bg-transparent"
-                  }`}
-                />
-                <span className="ml-2 text-[10px] text-sqz-mute/70">
+                <span className="ml-2 text-[10px] opacity-70">
                   {c.id === "all"
                     ? PRODUCTS.length
                     : PRODUCTS.filter((p) => p.category === c.id).length}
@@ -66,8 +83,8 @@ export default function Produtos() {
               </button>
             );
           })}
-          <div className="ml-auto hidden sm:block text-[10px] tracking-[0.3em] uppercase text-sqz-mute">
-            {filtered.length} resultados
+          <div className="ml-auto hidden sm:block text-[10px] tracking-[0.3em] uppercase text-sqz-mute font-semibold">
+            <span style={{ color: accent, fontWeight: 700 }}>{filtered.length}</span> resultados
           </div>
         </div>
       </div>
@@ -94,17 +111,17 @@ export default function Produtos() {
 
         {filtered.length === 0 && (
           <div className="text-center py-32" data-testid="empty-state">
-            <p className="font-display text-4xl text-sqz-mute">Nada encontrado.</p>
+            <p className="font-display text-5xl text-sqz-mute">Nada encontrado.</p>
           </div>
         )}
       </section>
 
       {/* End line */}
-      <section className="border-t border-sqz-line">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-24 text-center">
+      <section className="border-t border-sqz-line bg-sqz-yellow">
+        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-20 text-center">
           <p className="font-display text-5xl sm:text-7xl leading-tight tracking-tightest text-sqz-ink">
-            <span className="italic">Squizz.</span>{" "}
-            <span className="text-sqz-mute">end of feed.</span>
+            <span className="font-serif-italic font-normal">Squizz.</span>{" "}
+            <span className="text-sqz-pink">end of feed.</span>
           </p>
         </div>
       </section>
