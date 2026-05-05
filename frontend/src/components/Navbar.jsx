@@ -2,17 +2,13 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 
 export default function Navbar() {
-  const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    let last = window.scrollY;
     const onScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 24);
-      setHidden(y > last && y > 80);
-      last = y;
+      setScrolled(window.scrollY > 24);
     };
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -22,12 +18,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
-        hidden ? "-translate-y-full" : "translate-y-0"
-      } ${
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,backdrop-filter,border-color,box-shadow] duration-300 ${
         scrolled
-          ? "bg-sqz-bg/85 backdrop-blur-xl border-b border-sqz-line"
-          : "bg-transparent"
+          ? "bg-sqz-bg/90 backdrop-blur-xl border-b border-sqz-line shadow-sm"
+          : "bg-transparent border-b border-transparent"
       }`}
       data-testid="navbar"
     >
