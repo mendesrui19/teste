@@ -1,0 +1,122 @@
+{
+  "project_name": "SQZ Catalog",
+  "brand": "SQZ",
+  "theme": "light",
+  "archetype": "6_vibrant_play",
+  "design_philosophy": "Joyful, bold, and animated. A pop-art-inspired catalog with solid color blocks, thick borders, large rounded typography, and exaggerated playful motion. Zero generic 'SaaS' vibes. Heavily relies on contrast, bold colors, and interactive elements like squeezing lemons and falling juice drops.",
+  "colors": {
+    "primary": "#FBD503",
+    "secondary": "#04A5E6",
+    "accent_pink": "#FC6CA7",
+    "accent_green": "#B2D801",
+    "accent_lavender": "#D0B2FF",
+    "accent_orange": "#FE8E04",
+    "neutral_dark": "#151515",
+    "neutral_light": "#FFFFFF",
+    "background_default": "#FFFFFF",
+    "surface": "#FBD503"
+  },
+  "typography": {
+    "heading_font": "Fredoka, sans-serif",
+    "body_font": "Libre Franklin, sans-serif",
+    "scale": {
+      "h1": "text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight",
+      "h2": "text-4xl sm:text-5xl font-bold tracking-tight",
+      "h3": "text-2xl sm:text-3xl font-bold",
+      "body": "text-base sm:text-lg font-medium",
+      "button": "text-lg sm:text-xl font-bold uppercase tracking-wider"
+    }
+  },
+  "layout_and_spacing": {
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "section_spacing": "py-16 sm:py-24",
+    "grid_system": "Neobrutalist Bento / Asymmetric Grid. Use thick borders and hard shadows.",
+    "border_style": "border-[3px] border-[#151515]",
+    "shadow_style": "shadow-[8px_8px_0px_0px_rgba(21,21,21,1)] hover:shadow-[12px_12px_0px_0px_rgba(21,21,21,1)] transition-shadow duration-300",
+    "rounded_style": "rounded-2xl sm:rounded-3xl"
+  },
+  "motion_and_interaction": {
+    "hero_animation": "Lemon squeezing animation using Framer Motion (scale down on Y-axis, scale up on X-axis to simulate squish), followed by staggered juice drops falling down the screen.",
+    "hover_states": "-translate-y-1 transition-transform duration-200",
+    "particles": "Floating lemon drops or stars across the background using framer-motion or simple CSS absolute positioned animated divs.",
+    "marquee": "Endless scrolling marquee reading 'SQUEEEZE! SQZ THEM! WHEN LIFE GIVES YOU LEMON...' in large outlined text."
+  },
+  "components": {
+    "navigation": {
+      "style": "Sticky top-4 mx-4 z-50 bg-white border-[3px] border-[#151515] rounded-full px-6 py-4 flex justify-between items-center shadow-[6px_6px_0px_0px_rgba(21,21,21,1)]",
+      "links": ["Início", "Produtos", "Sobre Nós"]
+    },
+    "buttons": {
+      "primary": "bg-[#FC6CA7] text-white border-[3px] border-[#151515] rounded-full px-8 py-3 shadow-[4px_4px_0px_0px_rgba(21,21,21,1)] hover:-translate-y-1 hover:shadow-[6px_6px_0px_0px_rgba(21,21,21,1)] active:translate-y-0 active:shadow-none transition-all font-heading uppercase text-xl"
+    },
+    "product_card": {
+      "style": "bg-white border-[3px] border-[#151515] rounded-3xl overflow-hidden shadow-[8px_8px_0px_0px_rgba(21,21,21,1)] flex flex-col hover:-translate-y-2 hover:shadow-[12px_12px_0px_0px_rgba(21,21,21,1)] transition-all group",
+      "image_container": "w-full aspect-square border-b-[3px] border-[#151515] overflow-hidden bg-[#FBD503]/20",
+      "content": "p-6 flex flex-col gap-2 bg-[#FFFFFF]"
+    },
+    "category_pills": {
+      "style": "px-6 py-2 rounded-full border-[3px] border-[#151515] font-bold cursor-pointer transition-colors shadow-[4px_4px_0px_0px_rgba(21,21,21,1)]",
+      "active_bg": "bg-[#04A5E6] text-white",
+      "inactive_bg": "bg-white text-[#151515] hover:bg-[#FBD503]"
+    }
+  },
+  "pages": [
+    {
+      "name": "Home",
+      "path": "/",
+      "sections": [
+        "Hero: Massive typography 'SQZ', interactive/animated lemon squeeze visual, slogan 'When life gives you lemon...'",
+        "Marquee: Scrolling text separator",
+        "About Us: Short playful brand intro block with vibrant background (e.g., Pink or Blue)",
+        "Featured Products: Mini grid of 3-4 top products, link to view all"
+      ]
+    },
+    {
+      "name": "Produtos",
+      "path": "/produtos",
+      "sections": [
+        "Header: Title 'Nossos Produtos'",
+        "Filters: Categories -> Colares, Brincos, Anéis, Capas, Acessórios",
+        "Grid: Masonry or neat grid of all products"
+      ]
+    }
+  ],
+  "media_assets": {
+    "hero_lemon_animation_placeholder": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/e6ec786c-b304-44d9-acf3-0723c56bac93/images/01bb05b5291d2ec992d435d324a2201d19e15cf7178fa9356c8bd79fa3f037a8.png",
+      "description": "Playful pop-art lemon squeeze vector art for hero section"
+    },
+    "background_drops": {
+      "url": "https://static.prod-images.emergentagent.com/jobs/e6ec786c-b304-44d9-acf3-0723c56bac93/images/4b2144a0d374f3841f9b34a90d5d31f667729f350b36910dd1bb77324b656a18.png",
+      "description": "Abstract background with lemon drops and splashes"
+    },
+    "products": {
+      "colares": [
+        "https://images.unsplash.com/photo-1642597383758-28764a710e68?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzN8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMGNodW5reSUyMG5lY2tsYWNlJTIwamV3ZWxyeXxlbnwwfHx8fDE3Nzc5OTc1MDh8MA&ixlib=rb-4.1.0&q=85"
+      ],
+      "capas": [
+        "https://images.unsplash.com/photo-1582000129759-dc56c7b45cde?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHw0fHxjb2xvcmZ1bCUyMHBob25lJTIwY2FzZSUyMHBhc3RlbHxlbnwwfHx8fDE3Nzc5OTc1MDh8MA&ixlib=rb-4.1.0&q=85",
+        "https://images.unsplash.com/photo-1577954732026-2071521acdfb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwxfHxjb2xvcmZ1bCUyMHBob25lJTIwY2FzZSUyMHBhc3RlbHxlbnwwfHx8fDE3Nzc5OTc1MDh8MA&ixlib=rb-4.1.0&q=85"
+      ],
+      "acessorios": [
+        "https://images.unsplash.com/photo-1661705484082-85c0bbbe7254?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzN8MHwxfHNlYXJjaHwyfHxjb2xvcmZ1bCUyMGNodW5reSUyMG5lY2tsYWNlJTIwamV3ZWxyeXxlbnwwfHx8fDE3Nzc5OTc1MDh8MA&ixlib=rb-4.1.0&q=85"
+      ],
+      "lifestyle": [
+        "https://images.unsplash.com/photo-1592816348552-0f10135a5458?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2Nzd8MHwxfHNlYXJjaHwzfHxsZW1vbiUyMGZhc2hpb24lMjBsaWZlc3R5bGV8ZW58MHx8fHwxNzc3OTk3NTA4fDA&ixlib=rb-4.1.0&q=85"
+      ]
+    }
+  },
+  "testing": {
+    "attributes": "ALL interactive elements MUST include a data-testid attribute in kebab-case representing their role. Examples: data-testid='nav-link-produtos', data-testid='filter-button-colares', data-testid='product-card-1'."
+  },
+  "instructions_to_main_agent": [
+    "Use Tailwind CSS for styling. Implement the neobrutalist pop-art style with border-[3px] and solid shadows.",
+    "Do NOT use generic Shadcn cards out of the box. Customize them or build custom HTML divs with the specified borders.",
+    "Use Framer Motion to create the 'lemon squeeze' hero animation (scaling, bouncing) and floating lemon drops.",
+    "Include an infinite text marquee (e.g., using framer-motion or CSS keyframes) with the text 'SQUEEEZE! SQZ THEM!'.",
+    "Font combination: Fredoka for headings, Libre Franklin for body text. Load them via Google Fonts.",
+    "Ensure the layout feels like 'squiiz by Lemon Jelly' — playful, zine-like, highly colorful and fun.",
+    "Build the 'Produtos' page with a functioning client-side filter by category.",
+    "No checkout or cart flow needed; this is a display catalog."
+  ]
+}
