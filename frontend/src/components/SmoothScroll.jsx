@@ -8,6 +8,8 @@ export default function SmoothScroll() {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
+    // Expose globally so other components can call scrollTo
+    window.__lenis = lenis;
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -16,6 +18,7 @@ export default function SmoothScroll() {
     return () => {
       cancelAnimationFrame(id);
       lenis.destroy();
+      delete window.__lenis;
     };
   }, []);
   return null;

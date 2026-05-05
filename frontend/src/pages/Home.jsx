@@ -260,12 +260,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SLOGAN BANNER — uses your blue/pink/yellow slogan banner */}
-      <section className="relative" data-testid="slogan-banner-section">
+      {/* SLOGAN BANNER — full image, no crop */}
+      <section
+        className="relative w-full"
+        style={{ background: "#6889EC" }}
+        data-testid="slogan-banner-section"
+      >
         <img
           src={SLOGAN_BLUE}
           alt="When life gives you lemons SQZ them!"
-          className="w-full h-[60vh] min-h-[400px] object-cover"
+          className="w-full max-w-[1100px] mx-auto h-auto object-contain block"
         />
       </section>
 

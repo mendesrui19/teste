@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ProductCard from "../components/ProductCard";
 import Reveal from "../components/Reveal";
@@ -15,6 +15,15 @@ const CATEGORY_COLORS = {
 
 export default function Produtos() {
   const [active, setActive] = useState("all");
+
+  // Scroll to top when filter changes (uses Lenis if available)
+  useEffect(() => {
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { duration: 0.8 });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [active]);
 
   const filtered = useMemo(
     () => (active === "all" ? PRODUCTS : PRODUCTS.filter((p) => p.category === active)),
@@ -114,16 +123,6 @@ export default function Produtos() {
             <p className="font-display text-5xl text-sqz-mute">Nada encontrado.</p>
           </div>
         )}
-      </section>
-
-      {/* End line */}
-      <section className="border-t border-sqz-line bg-sqz-yellow">
-        <div className="max-w-[1600px] mx-auto px-6 lg:px-12 py-20 text-center">
-          <p className="font-display text-5xl sm:text-7xl leading-tight tracking-tightest text-sqz-ink">
-            <span className="font-serif-italic font-normal">Squizz.</span>{" "}
-            <span className="text-sqz-pink">end of feed.</span>
-          </p>
-        </div>
       </section>
     </div>
   );

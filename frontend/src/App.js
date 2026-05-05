@@ -11,7 +11,12 @@ import Produtos from "./pages/Produtos";
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
+    // Use Lenis if available, fallback to window
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
   }, [pathname]);
   return null;
 }
